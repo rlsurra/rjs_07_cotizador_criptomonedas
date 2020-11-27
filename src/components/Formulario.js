@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import useMoneda from '../hooks/useMoneda';
 import useCriptomoneda from '../hooks/useCriptomoneda';
 import axios from 'axios';
+import Error from './Error';
 
 const Boton = styled.input`
     margin-top: 20px;
@@ -22,7 +23,7 @@ const Boton = styled.input`
     }
 `;
 
-const Formulario = () => {
+const Formulario = ({guardarMoneda,guardarCriptomoneda}) => {
 
     const MONEDAS = [
         { codigo: 'USD', nombre: 'Dolar de EEUU'},
@@ -62,20 +63,20 @@ const Formulario = () => {
             return;
         }
         guardarError(false);
-
+        guardarMoneda(moneda);
+        guardarCriptomoneda(criptomoneda);
     }
 
     return ( 
         <form onSubmit={cotizarMoneda}>
-
-            {error ? "Hubo un error" : null}
-
             <SeleccionarMoneda/>
             <SeleccionarCriptomoneda/>
             <Boton
                 type="submit"
-                value="CALCULAR"
-            />
+                value="Calcular"
+                />
+            {error ? <Error mensaje="Todos los campos son obligatorios"></Error> : null}
+
         </form>
      );
 }
