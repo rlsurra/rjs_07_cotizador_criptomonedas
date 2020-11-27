@@ -20,8 +20,6 @@ const Precio = styled.p`
     }
 `;
 
-
-
 const Cotizacion = ({resultado}) => {
     if(Object.keys(resultado).length === 0) return null; //si el objeto llega vacio no muestra nada
     return ( 
